@@ -11,7 +11,7 @@ from components.one_in_all.cli import LLMClientAPI
 
 
 class TestCli(unittest.TestCase):
-    api_base = "https://xiaoai.plus/v1"
+    api_base = "https://xiaoai.plus"
     api_key = "sZoc7LZQQ9kRyDqHD4Ca700e6f81487fBe608aEc0650D066"
 
     def test_chat(self):
@@ -23,8 +23,7 @@ class TestCli(unittest.TestCase):
                                            messages=[{"role": "system", "content": "## 角色\n你是一个没有感情的文字重复机器，请重复我的问题："},
                                                      {"role": "user", "content": test_answer}
                                                      ],
-                                           stream=False
-                                           ):
+                                           stream=False):
 
                 content = item["choices"][0]["message"]["content"]
                 self.assertIsInstance(content, str)

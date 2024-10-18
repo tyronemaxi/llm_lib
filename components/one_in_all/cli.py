@@ -84,19 +84,10 @@ class ChatCompletionResponse(BaseModel):
     usage: UsageInfo = Field(..., description="Usage info")
 
 
-class RequestBuilder:
-    @staticmethod
-    def build_chat_request(model: str, messages: List, temperature: float, max_tokens: int, stream: bool) -> dict:
-        return ChatCompletionRequestBody(
-            model=model,
-            messages=messages,
-            stream=stream,
-            temperature=temperature,
-            max_tokens=max_tokens,
-        ).model_dump()
-
-
 class BaseLLMAPI(ABC):
+    """
+    Base class for LLM API.
+    """
     def __init__(self, api_base: str, api_key: str, timeout: Optional[int] = 120):
         if not api_key:
             raise Exception("API key is not provided.")
@@ -137,6 +128,9 @@ class BaseLLMAPI(ABC):
 
 
 class LLMClientAPI(BaseLLMAPI):
+    """
+    大模型调用框架
+    """
     async def _chat_stream(self, data: dict):
         async with self._http_client.stream("POST", f"{self._api_url}/chat/completions", json=data) as response:
             if response.status_code == 200:

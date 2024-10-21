@@ -8,7 +8,7 @@ Time: 2024/10/17 13:15
 from setuptools import setup, find_packages
 
 setup(
-    name='llb_lib',
+    name='llm_lib',
     version='0.1.0',
     author='tyrone',
     author_email='tyronextian@gmail.com',
